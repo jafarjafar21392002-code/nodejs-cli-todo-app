@@ -1,11 +1,14 @@
 const readline = require("readline");
+ const fs = require("fs");
+
 
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
 
-let tasks = [];
+const answer = fs.readFileSync("tasks.json", "utf8");
+const tasks = JSON.parse(answer);
 
 function showMenu() {
 
@@ -21,6 +24,11 @@ function showMenu() {
             rl.question("What is your task? ", function(answer) {
 
                 tasks.push(answer);
+                
+
+         const result =      JSON.stringify(tasks);
+
+fs.writeFileSync("tasks.json",result)
 
                 console.log("Task added!");
 
